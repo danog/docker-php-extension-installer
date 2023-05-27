@@ -3,7 +3,7 @@ name: Update README and create release
 on:
   push:
     branches:
-      - master
+      - test
   create:
     tags:
       - "*"
@@ -24,7 +24,7 @@ jobs:
           || github.event_name == 'repository_dispatch'
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: test
           fetch-depth: 0
       - name: Update README
         if: >
