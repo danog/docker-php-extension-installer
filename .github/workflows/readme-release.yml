@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         if: >
-          (github.event_name == 'push' && github.ref == 'refs/heads/master')
+          (github.event_name == 'push' && github.ref == 'refs/heads/test')
           || (github.event_name == 'create' && github.event.ref_type == 'tag')
           || github.event_name == 'repository_dispatch'
         uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
       - name: Update README
         if: >
-          (github.event_name == 'push' && github.ref == 'refs/heads/master')
+          (github.event_name == 'push' && github.ref == 'refs/heads/test')
           || github.event_name == 'repository_dispatch'
         run: |
           ./scripts/update-readme
@@ -44,7 +44,7 @@ jobs:
           fi
       - name: Look for the recent version tags
         if: >
-          (github.event_name == 'push' && github.ref == 'refs/heads/master')
+          (github.event_name == 'push' && github.ref == 'refs/heads/test')
           || (github.event_name == 'create' && github.event.ref_type == 'tag')
           || github.event_name == 'repository_dispatch'
         run: |
@@ -69,7 +69,7 @@ jobs:
           printf 'VERSIONTAG_LAST=%s\n' "$VERSIONTAG_LAST" >> "$GITHUB_ENV"
           printf 'VERSIONTAG_PENULTIMATE=%s\n' "$VERSIONTAG_PENULTIMATE" >> "$GITHUB_ENV"
       - name: Check if we need to create a version tag after a push
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/test'
         run: |
           VERSIONTAG_THIS=
           if test -z "$VERSIONTAG_LAST"; then
